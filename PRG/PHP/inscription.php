@@ -100,8 +100,6 @@ function verificationDonnees(){
     return $prenomValide && $nomValide && $ageValide && $nomUtilisateurValide;
 }
 
-verificationDonnees();
-
 if (verificationDonnees() && $message == ""){
     #header("Location: confirmation.php", false, 303);
     #Ou simplement :
