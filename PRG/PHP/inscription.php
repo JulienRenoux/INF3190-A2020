@@ -4,9 +4,9 @@
 Message significatif pour chaque erreur et redirection
 */
 
-
 function nomValide(){
     $nomEstValide = true;
+    global $message;
     if(!isset($_POST["nom"])){
         http_response_code(400);
         exit;
@@ -26,6 +26,7 @@ function nomValide(){
 
 function prenomValide(){
     $prenomEstValide = true;
+    global $message;
 
     if(!isset($_POST["prenom"])){
         http_response_code(400);
@@ -47,6 +48,7 @@ function prenomValide(){
 
 function nomUtilisateurValide(){
     $nomUtEstValide = true;
+    global $message;
     if(!isset($_POST["nom-utilisateur"])){
         http_response_code(400);
         exit;
@@ -54,7 +56,7 @@ function nomUtilisateurValide(){
     $nomUtilisateur = $_POST["nom-utilisateur"];
 
     if((empty($nomUtilisateur))){
-        $message = "Le champ prénom est obligatoire<";
+        $message = "Le champ prénom est obligatoire";
         $nomUtEstValide = false;
     }
     if(strlen($nomUtilisateur) > 8){
@@ -66,6 +68,7 @@ function nomUtilisateurValide(){
 
 function ageValide(){
     $ageEstValide = true;
+    global $message;
     if(!isset($_POST["age"])){
         http_response_code(400);
         exit;
@@ -97,7 +100,9 @@ function verificationDonnees(){
     return $prenomValide && $nomValide && $ageValide && $nomUtilisateurValide;
 }
 
-if ($message == ""){
+verificationDonnees();
+
+if (verificationDonnees() && $message == ""){
     #header("Location: confirmation.php", false, 303);
     #Ou simplement :
     header("Location: confirmation.php");
